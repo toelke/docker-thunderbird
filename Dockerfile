@@ -1,4 +1,4 @@
-FROM debian:bookworm-20240701 AS downloader
+FROM debian:bookworm-20240722 AS downloader
 
 RUN apt update && apt install -y lbzip2 thunderbird
 
