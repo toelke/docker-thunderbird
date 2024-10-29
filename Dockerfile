@@ -1,10 +1,11 @@
 FROM debian:bookworm-20241016 AS downloader
 
-RUN apt update && apt install -y lbzip2 thunderbird
+RUN apt update && apt install -y lbzip2 thunderbird wget curl jq
 
 WORKDIR /installer
-ADD https://download.mozilla.org/\?product\=thunderbird-latest\&os\=linux64\&lang\=en-US thunderbird.tar.gz
-RUN tar xaf *.tar.gz
+RUN v=$(curl https://product-details.mozilla.org/1.0/thunderbird_versions.json | jq -r '.THUNDERBIRD_ESR'); \
+	wget -O thunderbird.tar.bz2 https://download.mozilla.org/\?product\=thunderbird-$v\&os\=linux64\&lang\=en-US
+RUN tar xaf *.tar.bz2
 RUN mkdir /libs; \
 	cp /usr/lib/x86_64-linux-gnu/libgthread-2.0.so.0 /libs; \
 	ldd /usr/lib/x86_64-linux-gnu/libgthread-2.0.so.0 \
