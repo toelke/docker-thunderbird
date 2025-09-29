@@ -3,7 +3,7 @@ FROM debian:bookworm-20250908 AS downloader
 RUN apt update && apt install -y lbzip2 thunderbird wget curl jq xz-utils
 
 WORKDIR /installer
-RUN v=$(curl https://product-details.mozilla.org/1.0/thunderbird_versions.json | jq -r '.THUNDERBIRD_ESR'); \
+RUN v=$(curl https://product-details.mozilla.org/1.0/thunderbird_versions.json | jq -r '.LATEST_THUNDERBIRD_VERSION'); \
 	wget -O thunderbird.tar.bz2 https://download.mozilla.org/\?product\=thunderbird-$v\&os\=linux64\&lang\=en-US
 RUN tar xaf *.tar.bz2
 RUN mkdir /libs; \
