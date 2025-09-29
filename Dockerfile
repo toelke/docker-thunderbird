@@ -1,6 +1,6 @@
 FROM debian:bookworm-20250908 AS downloader
 
-RUN apt update && apt install -y lbzip2 thunderbird wget curl jq
+RUN apt update && apt install -y lbzip2 thunderbird wget curl jq xz-utils
 
 WORKDIR /installer
 RUN v=$(curl https://product-details.mozilla.org/1.0/thunderbird_versions.json | jq -r '.THUNDERBIRD_ESR'); \
