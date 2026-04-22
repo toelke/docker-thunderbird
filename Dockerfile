@@ -1,4 +1,4 @@
-FROM debian:bookworm-20260316 AS downloader
+FROM debian:bookworm-20260406 AS downloader
 
 RUN apt update && apt install -y lbzip2 thunderbird wget curl jq xz-utils
 
